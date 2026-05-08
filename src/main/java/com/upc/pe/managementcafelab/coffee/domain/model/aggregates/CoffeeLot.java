@@ -2,6 +2,8 @@ package com.upc.pe.managementcafelab.coffee.domain.model.aggregates;
 
 import com.upc.pe.managementcafelab.coffee.domain.exceptions.InvalidNewStatusException;
 import com.upc.pe.managementcafelab.coffee.domain.exceptions.LotInvariantException;
+import com.upc.pe.managementcafelab.coffee.domain.model.commands.CreateCoffeeLotCommand;
+import com.upc.pe.managementcafelab.coffee.domain.model.commands.UpdateCoffeeLotCommand;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.Certification;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
@@ -79,6 +81,29 @@ public class CoffeeLot extends AuditableAbstractAggregateRoot<CoffeeLot> {
         this.status             = new LotStatus(status);
         this.processingMethod  = new ProcessingMethod(processingMethod);
         this.certifications     = new ArrayList<>();
+    }
+
+    public CoffeeLot(CreateCoffeeLotCommand command) {
+        this(
+                command.coffeeLotId(),
+                command.supplierId(),
+                command.userId(),
+                command.lotName(),
+                command.coffeeType(),
+                command.origin(),
+                command.status(),
+                command.altitudeMeters(),
+                command.processingMethod(),
+                command.initialWeight()
+        );
+    }
+
+    public void applyUpdate(UpdateCoffeeLotCommand command) {
+        this.lotName = command.lotName();
+        this.coffeeType = command.coffeeType();
+        this.origin = command.origin();
+        this.altitudeMeters = command.altitudeMeters();
+        this.processingMethod = new ProcessingMethod(command.processingMethod());
     }
 
     public void advanceStatus(String targetStatus) {
