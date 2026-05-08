@@ -9,12 +9,13 @@ import java.util.List;
 
 public record UpdateCoffeeLotResource(
         String lotName,
-        String supplierId,
-        CoffeeType coffeeType,
+        Long supplierId,
+        Long userId,
+        String coffeeType,
         String origin,
         Double altitudeMeters,
-        ProcessingMethod processingMethod,
-        List<Certification> certifications
+        String processingMethod,
+        List<String> certifications
 ) {
     public UpdateCoffeeLotResource {
 
@@ -38,4 +39,5 @@ public record UpdateCoffeeLotResource(
             throw new IllegalArgumentException("processingMethod is required");
         }
     }
+
 }

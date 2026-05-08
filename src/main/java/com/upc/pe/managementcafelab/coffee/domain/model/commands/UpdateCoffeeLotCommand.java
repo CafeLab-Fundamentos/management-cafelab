@@ -2,8 +2,9 @@ package com.upc.pe.managementcafelab.coffee.domain.model.commands;
 
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.Certification;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
-import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
+
+import java.util.List;
 
 public record UpdateCoffeeLotCommand(
         Long coffeeLotId,
@@ -12,13 +13,13 @@ public record UpdateCoffeeLotCommand(
         String lotName,
         CoffeeType coffeeType,
         String origin,
-        LotStatus status,
         Double altitudeMeters,
         ProcessingMethod processingMethod,
-        Double initialWeight,
-        Certification certification
+        List<Certification> certifications
 ) {
+
     public UpdateCoffeeLotCommand {
+
         if (coffeeLotId == null || coffeeLotId <= 0)
             throw new IllegalArgumentException("CoffeeLotId es requerido y debe ser positivo");
 
@@ -37,16 +38,13 @@ public record UpdateCoffeeLotCommand(
         if (origin == null || origin.isBlank())
             throw new IllegalArgumentException("Origin es requerido");
 
-        if (status == null)
-            throw new IllegalArgumentException("Status es requerido");
-
         if (altitudeMeters == null || altitudeMeters <= 0)
             throw new IllegalArgumentException("AltitudeMeters es requerido y debe ser positivo");
 
         if (processingMethod == null)
             throw new IllegalArgumentException("ProcessingMethod es requerido");
 
-        if (initialWeight == null || initialWeight <= 0)
-            throw new IllegalArgumentException("InitialWeight es requerido y debe ser positivo");
+        if (certifications == null)
+            throw new IllegalArgumentException("Certifications es requerido");
     }
 }

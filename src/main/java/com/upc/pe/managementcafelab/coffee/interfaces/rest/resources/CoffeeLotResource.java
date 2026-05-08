@@ -12,12 +12,12 @@ public record CoffeeLotResource(
         Long supplierId,
         Long userId,
         String lotName,
-        CoffeeType coffeeType,
+        String coffeeType,
         String origin,
         Double altitudeMeters,
-        LotStatus status,
+        String status,
         Double remainingWeight,
-        ProcessingMethod processingMethod,
-        List<Certification> certifications
+        String processingMethod,
+        List<String> certifications
 ) {
 }
