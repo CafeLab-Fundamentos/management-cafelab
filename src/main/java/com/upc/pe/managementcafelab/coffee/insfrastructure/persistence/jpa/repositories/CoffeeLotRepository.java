@@ -1,4 +1,4 @@
-package com.upc.pe.managementcafelab.coffee.persistence.jpa.repositories;
+package com.upc.pe.managementcafelab.coffee.insfrastructure.persistence.jpa.repositories;
 
 import com.upc.pe.managementcafelab.coffee.domain.model.aggregates.CoffeeLot;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;

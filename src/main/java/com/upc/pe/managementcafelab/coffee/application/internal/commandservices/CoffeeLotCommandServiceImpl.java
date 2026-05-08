@@ -5,7 +5,7 @@ import com.upc.pe.managementcafelab.coffee.domain.model.commands.CreateCoffeeLot
 import com.upc.pe.managementcafelab.coffee.domain.model.commands.DeleteCoffeeLotCommand;
 import com.upc.pe.managementcafelab.coffee.domain.model.commands.UpdateCoffeeLotCommand;
 import com.upc.pe.managementcafelab.coffee.domain.services.CoffeeLotCommandService;
-import com.upc.pe.managementcafelab.coffee.persistence.jpa.repositories.CoffeeLotRepository;
+import com.upc.pe.managementcafelab.coffee.insfrastructure.persistence.jpa.repositories.CoffeeLotRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

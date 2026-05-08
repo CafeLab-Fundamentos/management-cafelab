@@ -6,7 +6,7 @@ import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
 import com.upc.pe.managementcafelab.coffee.domain.services.CoffeeLotQueryService;
-import com.upc.pe.managementcafelab.coffee.persistence.jpa.repositories.CoffeeLotRepository;
+import com.upc.pe.managementcafelab.coffee.insfrastructure.persistence.jpa.repositories.CoffeeLotRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
