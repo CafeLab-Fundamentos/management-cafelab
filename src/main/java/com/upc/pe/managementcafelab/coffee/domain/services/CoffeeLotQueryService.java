@@ -28,4 +28,5 @@ public interface CoffeeLotQueryService {
     List<CoffeeLot> handle(GetCoffeeLotsByUserIdQuery query);
 
     List<CoffeeLot> handle(GetDepletedCoffeeLotsQuery query);
+
 }

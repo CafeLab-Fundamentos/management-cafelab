@@ -1,6 +1,8 @@
 package com.upc.pe.managementcafelab.coffee.domain.model.commands;
 
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
 
 public record CreateCoffeeLotCommand(
         Long coffeeLotId,
@@ -9,9 +11,9 @@ public record CreateCoffeeLotCommand(
         String lotName,
         CoffeeType coffeeType,
         String origin,
-        String status,
+        LotStatus status,
         Double altitudeMeters,
-        String processingMethod,
+        ProcessingMethod processingMethod,
         Double initialWeight
 ) {
     public CreateCoffeeLotCommand {
@@ -33,13 +35,13 @@ public record CreateCoffeeLotCommand(
         if (origin == null || origin.isBlank())
             throw new IllegalArgumentException("Origin es requerido");
 
-        if (status == null || status.isBlank())
+        if (status == null)
             throw new IllegalArgumentException("Status es requerido");
 
         if (altitudeMeters == null || altitudeMeters <= 0)
             throw new IllegalArgumentException("AltitudeMeters es requerido y debe ser positivo");
 
-        if (processingMethod == null || processingMethod.isBlank())
+        if (processingMethod == null)
             throw new IllegalArgumentException("ProcessingMethod es requerido");
 
         if (initialWeight == null || initialWeight <= 0)

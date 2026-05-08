@@ -1,23 +1,28 @@
 package com.upc.pe.managementcafelab.coffee.interfaces.rest.resources;
 
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.Certification;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
+
 import java.util.List;
 
 public record UpdateCoffeeLotResource(
         String lotName,
-        String coffeeType,
+        String supplierId,
+        CoffeeType coffeeType,
         String origin,
         Double altitudeMeters,
-        String processingMethod,
-        List<String> certifications
+        ProcessingMethod processingMethod,
+        List<Certification> certifications
 ) {
-
     public UpdateCoffeeLotResource {
 
         if (lotName == null || lotName.isBlank()) {
             throw new IllegalArgumentException("lotName is required");
         }
 
-        if (coffeeType == null || coffeeType.isBlank()) {
+        if (coffeeType == null) {
             throw new IllegalArgumentException("coffeeType is required");
         }
 
@@ -29,7 +34,7 @@ public record UpdateCoffeeLotResource(
             throw new IllegalArgumentException("altitudeMeters must be >= 0");
         }
 
-        if (processingMethod == null || processingMethod.isBlank()) {
+        if (processingMethod == null) {
             throw new IllegalArgumentException("processingMethod is required");
         }
     }
