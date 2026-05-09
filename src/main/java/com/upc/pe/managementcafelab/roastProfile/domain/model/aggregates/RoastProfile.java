@@ -1,6 +1,7 @@
 package com.upc.pe.managementcafelab.roastProfile.domain.model.aggregates;
 
 import com.upc.pe.managementcafelab.roastProfile.domain.model.commands.CreateRoastProfileCommand;
+import com.upc.pe.managementcafelab.roastProfile.domain.model.commands.UpdateRoastProfileCommand;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.valueObjects.DurationInSeconds;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.valueObjects.RoastType;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.valueObjects.TemperatureRange;
@@ -72,9 +73,10 @@ public class RoastProfile extends AuditableAbstractAggregateRoot<RoastProfile> {
 
     public void update(UpdateRoastProfileCommand command) {
         this.name = command.name();
-        this.temperatureRange = command.temperatureRange();
-        this.durationSeconds = command.durationSeconds();
-        this.type = command.type();
+        this.temperatureRange = new TemperatureRange(command.temperatureStart(), command.temperatureEnd());
+        this.durationSeconds = new DurationInSeconds(command.durationSeconds());
+        this.type = RoastType.valueOf(command.type().toUpperCase());
         this.isFavorite = command.isFavorite();
+
     }
 }

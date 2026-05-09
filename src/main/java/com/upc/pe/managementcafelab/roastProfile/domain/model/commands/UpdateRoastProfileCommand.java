@@ -7,9 +7,10 @@ import com.upc.pe.managementcafelab.roastProfile.domain.model.valueObjects.Tempe
 public record UpdateRoastProfileCommand(
         Long roastProfileId,
         String name,
-        TemperatureRange temperatureRange,
-        DurationInSeconds durationSeconds,
-        RoastType type,
+        Double temperatureStart,
+        Double temperatureEnd,
+        Integer durationSeconds,
+        String type,
         Boolean isFavorite
 ) {
 
@@ -21,8 +22,10 @@ public record UpdateRoastProfileCommand(
         if (name == null || name.isBlank())
             throw new IllegalArgumentException("name is required");
 
-        if (temperatureRange == null)
-            throw new IllegalArgumentException("temperatureRange is required");
+        if (temperatureEnd == null)
+            throw new IllegalArgumentException("temperatureEnd is required");
+        if (temperatureStart == null)
+            throw new IllegalArgumentException("temperatureStart is required");
 
         if (durationSeconds == null)
             throw new IllegalArgumentException("durationSeconds is required");

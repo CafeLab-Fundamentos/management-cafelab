@@ -67,11 +67,10 @@ public class CoffeeLot extends AuditableAbstractAggregateRoot<CoffeeLot> {
     @Enumerated(EnumType.STRING)
     @CollectionTable(
             name = "coffee_lot_certifications",
-            joinColumns = @JoinColumn(name = "id")
+            joinColumns = @JoinColumn(name = "coffee_lot_id")
     )
     @Column(name = "certification")
     private List<Certification> certifications = new ArrayList<>();
-
 
     private CoffeeLot(
             Long supplierId,
