@@ -10,7 +10,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    private static final String SUPPLIER_API = "/api/v1/suppliers/**";
     private static final String COFFEE_API = "/api/v1/coffee-lots/**";
+    private static final String ROAST_PROFILE = "/api/v1/roast-profiles/**";
     private static final String ROOT = "/";
     private static final String ERROR = "/error";
     private static final String SWAGGER_UI = "/swagger-ui/**";
@@ -21,6 +23,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth.requestMatchers(
                 COFFEE_API,
+            SUPPLIER_API,
+            ROAST_PROFILE,
             ROOT,
             ERROR,
             SWAGGER_UI,
@@ -29,6 +33,8 @@ public class SecurityConfiguration {
         ).permitAll().anyRequest().authenticated())
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
                         COFFEE_API,
+                    SUPPLIER_API,
+                    ROAST_PROFILE,
                     ROOT,
                     ERROR,
                     SWAGGER_UI,
