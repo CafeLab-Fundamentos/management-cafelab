@@ -8,7 +8,6 @@ import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingM
 import java.util.List;
 
 public record CoffeeLotResource(
-        Long coffeeLotId,
         Long supplierId,
         Long userId,
         String lotName,

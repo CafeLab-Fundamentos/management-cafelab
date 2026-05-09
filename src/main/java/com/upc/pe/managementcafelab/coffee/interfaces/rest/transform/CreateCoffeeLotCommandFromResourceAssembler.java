@@ -1,6 +1,7 @@
 package com.upc.pe.managementcafelab.coffee.interfaces.rest.transform;
 
 import com.upc.pe.managementcafelab.coffee.domain.model.commands.CreateCoffeeLotCommand;
+import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.Certification;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
@@ -11,16 +12,19 @@ public class CreateCoffeeLotCommandFromResourceAssembler {
     public static CreateCoffeeLotCommand toCommand(CreateCoffeeLotResource resource) {
 
         return new CreateCoffeeLotCommand(
-                resource.coffeeLotId(),
                 resource.supplierId(),
                 resource.userId(),
                 resource.lotName(),
-                new CoffeeType(resource.coffeeType()),
+                resource.coffeeType(),
                 resource.origin(),
-                new LotStatus(resource.status()),
+                resource.status(),
                 resource.altitudeMeters(),
-                new ProcessingMethod(resource.processingMethod()),
-                resource.initialWeight()
+                resource.processingMethod(),
+                resource.initialWeight(),
+                resource.certifications()
+                        .stream()
+                        .map(cert -> Certification.valueOf(cert.toUpperCase()))
+                        .toList()
         );
     }
 }

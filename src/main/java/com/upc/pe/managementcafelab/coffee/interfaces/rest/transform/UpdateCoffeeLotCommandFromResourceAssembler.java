@@ -7,7 +7,6 @@ import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingM
 import com.upc.pe.managementcafelab.coffee.interfaces.rest.resources.UpdateCoffeeLotResource;
 
 import java.util.stream.Collectors;
-
 public class UpdateCoffeeLotCommandFromResourceAssembler {
 
     public static UpdateCoffeeLotCommand toCommand(
@@ -26,7 +25,7 @@ public class UpdateCoffeeLotCommandFromResourceAssembler {
                 new ProcessingMethod(resource.processingMethod()),
                 resource.certifications()
                         .stream()
-                        .map(Certification::new)
+                        .map(cert -> Certification.valueOf(cert.toUpperCase()))
                         .collect(Collectors.toList())
         );
     }

@@ -1,50 +1,51 @@
-package com.upc.pe.managementcafelab.coffee.domain.model.commands;
+    package com.upc.pe.managementcafelab.coffee.domain.model.commands;
 
-import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
-import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
-import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
+    import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.Certification;
+    import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
+    import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
+    import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
 
-public record CreateCoffeeLotCommand(
-        Long coffeeLotId,
-        Long supplierId,
-        Long userId,
-        String lotName,
-        CoffeeType coffeeType,
-        String origin,
-        LotStatus status,
-        Double altitudeMeters,
-        ProcessingMethod processingMethod,
-        Double initialWeight
-) {
-    public CreateCoffeeLotCommand {
-        if (coffeeLotId == null || coffeeLotId <= 0)
-            throw new IllegalArgumentException("CoffeeLotId es requerido y debe ser positivo");
+    import java.util.List;
 
-        if (supplierId == null || supplierId <= 0)
-            throw new IllegalArgumentException("SupplierId es requerido y debe ser positivo");
+    public record CreateCoffeeLotCommand(
+            Long supplierId,
+            Long userId,
+            String lotName,
+            String coffeeType,
+            String origin,
+            String status,
+            Double altitudeMeters,
+            String processingMethod,
+            Double initialWeight,
+            List<Certification> certifications
+    ) {
+        public CreateCoffeeLotCommand {
 
-        if (userId == null || userId <= 0)
-            throw new IllegalArgumentException("UserId es requerido y debe ser positivo");
+            if (supplierId == null || supplierId <= 0)
+                throw new IllegalArgumentException("SupplierId es requerido y debe ser positivo");
 
-        if (lotName == null || lotName.isBlank())
-            throw new IllegalArgumentException("LotName es requerido");
+            if (userId == null || userId <= 0)
+                throw new IllegalArgumentException("UserId es requerido y debe ser positivo");
 
-        if (coffeeType == null)
-            throw new IllegalArgumentException("CoffeeType es requerido");
+            if (lotName == null || lotName.isBlank())
+                throw new IllegalArgumentException("LotName es requerido");
 
-        if (origin == null || origin.isBlank())
-            throw new IllegalArgumentException("Origin es requerido");
+            if (coffeeType == null)
+                throw new IllegalArgumentException("CoffeeType es requerido");
 
-        if (status == null)
-            throw new IllegalArgumentException("Status es requerido");
+            if (origin == null || origin.isBlank())
+                throw new IllegalArgumentException("Origin es requerido");
 
-        if (altitudeMeters == null || altitudeMeters <= 0)
-            throw new IllegalArgumentException("AltitudeMeters es requerido y debe ser positivo");
+            if (status == null)
+                throw new IllegalArgumentException("Status es requerido");
 
-        if (processingMethod == null)
-            throw new IllegalArgumentException("ProcessingMethod es requerido");
+            if (altitudeMeters == null || altitudeMeters <= 0)
+                throw new IllegalArgumentException("AltitudeMeters es requerido y debe ser positivo");
 
-        if (initialWeight == null || initialWeight <= 0)
-            throw new IllegalArgumentException("InitialWeight es requerido y debe ser positivo");
+            if (processingMethod == null)
+                throw new IllegalArgumentException("ProcessingMethod es requerido");
+
+            if (initialWeight == null || initialWeight <= 0)
+                throw new IllegalArgumentException("InitialWeight es requerido y debe ser positivo");
+        }
     }
-}

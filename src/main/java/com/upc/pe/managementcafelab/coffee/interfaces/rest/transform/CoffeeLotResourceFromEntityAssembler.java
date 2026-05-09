@@ -16,7 +16,6 @@ public class CoffeeLotResourceFromEntityAssembler {
     public static CoffeeLotResource toResourceFromEntity(CoffeeLot entity) {
 
         return new CoffeeLotResource(
-                entity.getCoffeeLotId(),
                 entity.getSupplierId(),
                 entity.getUserId(),
                 entity.getLotName(),

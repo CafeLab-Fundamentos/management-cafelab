@@ -3,7 +3,6 @@ package com.upc.pe.managementcafelab.coffee.interfaces.rest.resources;
 import java.util.List;
 
 public record CreateCoffeeLotResource(
-        Long coffeeLotId,
         Long supplierId,
         Long userId,
         String lotName,
@@ -17,10 +16,6 @@ public record CreateCoffeeLotResource(
 ) {
 
     public CreateCoffeeLotResource {
-
-        if (coffeeLotId == null || coffeeLotId <= 0) {
-            throw new IllegalArgumentException("coffeeLotId is required and must be positive");
-        }
 
         if (supplierId == null || supplierId <= 0) {
             throw new IllegalArgumentException("supplierId is required and must be positive");

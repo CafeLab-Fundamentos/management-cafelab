@@ -1,6 +1,6 @@
 package com.upc.pe.managementcafelab.shared.interfaces.rest.support;
 
-import com.acme.procedurescafelab.shared.interfaces.rest.resources.MessageResource;
+import com.upc.pe.managementcafelab.shared.interfaces.rest.resources.MessageResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

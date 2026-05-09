@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public record LotStatus(String value) {
-    ;
+
     private static final List<String> VALID_TYPES = Arrays.asList("Disponible", "Agotado", "En cuarentena");
 
     public LotStatus {

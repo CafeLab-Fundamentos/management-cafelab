@@ -1,6 +1,6 @@
 package com.upc.pe.managementcafelab.shared.interfaces.rest;
 
-import com.acme.procedurescafelab.shared.interfaces.rest.resources.MessageResource;
+import com.upc.pe.managementcafelab.shared.interfaces.rest.resources.MessageResource;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
