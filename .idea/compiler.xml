@@ -15,12 +15,13 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="management-cafelab" />
+        <module name="Procedures-CafeLab" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Procedures-CafeLab" options="-parameters" />
       <module name="management-cafelab" options="-parameters" />
     </option>
   </component>
