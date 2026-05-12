@@ -139,14 +139,15 @@ public class CoffeeLot extends AuditableAbstractAggregateRoot<CoffeeLot> {
 
     public void consumeStock(double quantity) {
 
-        if (!Objects.equals(this.status, new LotStatus("Disponible"))) {
+        if (!Objects.equals(this.status.value(), "Disponible")) {
             throw new LotInvariantException();
-
         }
 
         if (this.remainingWeight - quantity < 0) {
-            this.remainingWeight = this.remainingWeight - quantity;
+            throw new LotInvariantException();
         }
+
+        this.remainingWeight = this.remainingWeight - quantity;
 
         // agotado cuando es 0
         if (this.remainingWeight == 0) {
