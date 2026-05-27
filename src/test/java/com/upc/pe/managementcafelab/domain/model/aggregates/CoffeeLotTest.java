@@ -1,4 +1,4 @@
-package com.acme.management.cafelab.domain.model.aggregates;
+package com.upc.pe.managementcafelab.domain.model.aggregates;
 
 import com.upc.pe.managementcafelab.coffee.domain.exceptions.InvalidNewStatusException;
 import com.upc.pe.managementcafelab.coffee.domain.exceptions.LotInvariantException;
