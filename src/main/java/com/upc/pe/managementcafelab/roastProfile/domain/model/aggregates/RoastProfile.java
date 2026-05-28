@@ -27,6 +27,10 @@ public class RoastProfile extends AuditableAbstractAggregateRoot<RoastProfile> {
     private String name;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "start", column = @Column(name = "temperature_start", nullable = false)),
+            @AttributeOverride(name = "end", column = @Column(name = "temperature_end", nullable = false))
+    })
     private TemperatureRange temperatureRange;
 
     @Embedded

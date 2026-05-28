@@ -16,18 +16,19 @@ public class CoffeeLotResourceFromEntityAssembler {
     public static CoffeeLotResource toResourceFromEntity(CoffeeLot entity) {
 
         return new CoffeeLotResource(
+                entity.getId(),
                 entity.getSupplierId(),
                 entity.getUserId(),
                 entity.getLotName(),
-                entity.getCoffeeType().toString(),
+                entity.getCoffeeType().value(),
                 entity.getOrigin(),
                 entity.getAltitudeMeters(),
-                entity.getStatus().toString(),
+                entity.getStatus().value(),
                 entity.getRemainingWeight(),
-                entity.getProcessingMethod().toString(),
+                entity.getProcessingMethod().value(),
                 entity.getCertifications()
                         .stream()
-                        .map(Object::toString)
+                        .map(Certification::name)
                         .collect(Collectors.toList())
         );
     }

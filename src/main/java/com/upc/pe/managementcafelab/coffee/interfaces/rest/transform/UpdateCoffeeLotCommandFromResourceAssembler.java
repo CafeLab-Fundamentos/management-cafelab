@@ -6,7 +6,9 @@ import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.CoffeeType;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
 import com.upc.pe.managementcafelab.coffee.interfaces.rest.resources.UpdateCoffeeLotResource;
 
+import java.util.List;
 import java.util.stream.Collectors;
+
 public class UpdateCoffeeLotCommandFromResourceAssembler {
 
     public static UpdateCoffeeLotCommand toCommand(
@@ -23,9 +25,10 @@ public class UpdateCoffeeLotCommandFromResourceAssembler {
                 resource.origin(),
                 resource.altitudeMeters(),
                 new ProcessingMethod(resource.processingMethod()),
-                resource.certifications()
-                        .stream()
-                        .map(cert -> Certification.valueOf(cert.toUpperCase()))
+                resource.certifications() == null
+                        ? List.of()
+                        : resource.certifications().stream()
+                        .map(Certification::from)
                         .collect(Collectors.toList())
         );
     }

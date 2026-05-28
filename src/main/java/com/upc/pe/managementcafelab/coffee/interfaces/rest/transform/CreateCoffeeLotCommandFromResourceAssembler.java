@@ -7,6 +7,8 @@ import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.LotStatus;
 import com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs.ProcessingMethod;
 import com.upc.pe.managementcafelab.coffee.interfaces.rest.resources.CreateCoffeeLotResource;
 
+import java.util.List;
+
 public class CreateCoffeeLotCommandFromResourceAssembler {
 
     public static CreateCoffeeLotCommand toCommand(CreateCoffeeLotResource resource) {
@@ -21,9 +23,10 @@ public class CreateCoffeeLotCommandFromResourceAssembler {
                 resource.altitudeMeters(),
                 resource.processingMethod(),
                 resource.initialWeight(),
-                resource.certifications()
-                        .stream()
-                        .map(cert -> Certification.valueOf(cert.toUpperCase()))
+                resource.certifications() == null
+                        ? List.of()
+                        : resource.certifications().stream()
+                        .map(Certification::from)
                         .toList()
         );
     }
