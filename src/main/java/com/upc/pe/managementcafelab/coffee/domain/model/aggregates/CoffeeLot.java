@@ -129,17 +129,18 @@ public class CoffeeLot extends AuditableAbstractAggregateRoot<CoffeeLot> {
     public void advanceStatus(String targetStatus) {
 
         LotStatus newStatus = new LotStatus(targetStatus);
-        if (Objects.equals(targetStatus, "Disponible")&& this.remainingWeight<=0) {
+        if ((Objects.equals(targetStatus, "green") || Objects.equals(targetStatus, "roasted"))
+                && this.remainingWeight <= 0) {
             throw new InvalidNewStatusException();
         }
-        LotStatus previous = this.status;
         this.status = newStatus;
 
     }
 
     public void consumeStock(double quantity) {
 
-        if (!Objects.equals(this.status.value(), "Disponible")) {
+        if (!Objects.equals(this.status.value(), "green")
+                && !Objects.equals(this.status.value(), "roasted")) {
             throw new LotInvariantException();
         }
 
@@ -148,11 +149,6 @@ public class CoffeeLot extends AuditableAbstractAggregateRoot<CoffeeLot> {
         }
 
         this.remainingWeight = this.remainingWeight - quantity;
-
-        // agotado cuando es 0
-        if (this.remainingWeight == 0) {
-            this.status = new LotStatus("Agotado");
-        }
     }
 
 }

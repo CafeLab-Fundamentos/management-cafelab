@@ -4,18 +4,26 @@ import com.upc.pe.managementcafelab.coffee.domain.model.aggregates.CoffeeLot;
 import com.upc.pe.managementcafelab.coffee.domain.model.commands.*;
 import com.upc.pe.managementcafelab.coffee.domain.services.CoffeeLotCommandService;
 import com.upc.pe.managementcafelab.coffee.insfrastructure.persistence.jpa.repositories.CoffeeLotRepository;
+import com.upc.pe.managementcafelab.inventory.domain.model.commands.CreateInventoryEntryCommand;
+import com.upc.pe.managementcafelab.inventory.domain.services.InventoryEntryCommandService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 public class CoffeeLotCommandServiceImpl implements CoffeeLotCommandService {
 
     private final CoffeeLotRepository repository;
+    private final InventoryEntryCommandService inventoryEntryCommandService;
 
-    public CoffeeLotCommandServiceImpl(CoffeeLotRepository repository) {
+    public CoffeeLotCommandServiceImpl(
+            CoffeeLotRepository repository,
+            InventoryEntryCommandService inventoryEntryCommandService
+    ) {
         this.repository = repository;
+        this.inventoryEntryCommandService = inventoryEntryCommandService;
     }
 
     @Override
@@ -64,7 +72,23 @@ public class CoffeeLotCommandServiceImpl implements CoffeeLotCommandService {
 
                     coffeeLot.consumeStock(command.remainingWeight());
 
-                    return repository.save(coffeeLot);
+                    var saved = repository.save(coffeeLot);
+
+                    inventoryEntryCommandService.handle(
+                            new CreateInventoryEntryCommand(
+                                    coffeeLot.getUserId(),
+                                    command.coffeeLotId(),
+                                    command.remainingWeight(),
+                                    command.dateUsed() != null
+                                            ? command.dateUsed()
+                                            : LocalDateTime.now(),
+                                    command.finalProduct() != null
+                                            ? command.finalProduct()
+                                            : ""
+                            )
+                    );
+
+                    return saved;
                 });
     }
 }

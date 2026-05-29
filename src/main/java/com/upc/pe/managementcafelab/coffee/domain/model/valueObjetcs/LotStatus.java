@@ -1,11 +1,14 @@
 package com.upc.pe.managementcafelab.coffee.domain.model.valueObjetcs;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.Arrays;
 import java.util.List;
 
+@Embeddable
 public record LotStatus(String value) {
 
-    private static final List<String> VALID_TYPES = Arrays.asList("Disponible", "Agotado", "En cuarentena");
+    private static final List<String> VALID_TYPES = Arrays.asList("green", "roasted");
 
     public LotStatus {
         if (value == null || value.isBlank()) {
@@ -22,4 +25,5 @@ public record LotStatus(String value) {
     public LotStatus() {
         this(null);
     }
+
 }

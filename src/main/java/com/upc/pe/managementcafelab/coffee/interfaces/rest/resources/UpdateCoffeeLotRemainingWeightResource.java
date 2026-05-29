@@ -1,11 +1,15 @@
 package com.upc.pe.managementcafelab.coffee.interfaces.rest.resources;
 
-public record UpdateCoffeeLotRemainingWeightResource(Double weight) {
+public record UpdateCoffeeLotRemainingWeightResource(
+        Double weight,
+        String finalProduct,
+        String dateUsed
+) {
 
-        public UpdateCoffeeLotRemainingWeightResource {
+    public UpdateCoffeeLotRemainingWeightResource {
 
-            if (weight == null || weight <= 0) {
-                throw new IllegalArgumentException("weight is required");
-            }
+        if (weight == null || weight <= 0) {
+            throw new IllegalArgumentException("weight is required");
         }
     }
+}

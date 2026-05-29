@@ -1,7 +1,6 @@
 package com.upc.pe.managementcafelab.domain.model.aggregates;
 
 import com.upc.pe.managementcafelab.coffee.domain.exceptions.InvalidNewStatusException;
-import com.upc.pe.managementcafelab.coffee.domain.exceptions.LotInvariantException;
 import com.upc.pe.managementcafelab.coffee.domain.model.aggregates.CoffeeLot;
 import com.upc.pe.managementcafelab.coffee.domain.model.commands.CreateCoffeeLotCommand;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CoffeeLotTest {
 
-    private CoffeeLot createDisponibleLot(double weight) {
+    private CoffeeLot createGreenLot(double weight) {
 
         CreateCoffeeLotCommand command =
                 new CreateCoffeeLotCommand(
@@ -21,7 +20,7 @@ class CoffeeLotTest {
                         "Lote Premium",
                         "Arábica",
                         "Cusco",
-                        "Disponible",
+                        "green",
                         1500.0,
                         "Lavado",
                         weight,
@@ -31,7 +30,7 @@ class CoffeeLotTest {
         return new CoffeeLot(command);
     }
 
-    private CoffeeLot createEnCuarentenaLot(double weight) {
+    private CoffeeLot createRoastedLot(double weight) {
 
         CreateCoffeeLotCommand command =
                 new CreateCoffeeLotCommand(
@@ -40,7 +39,7 @@ class CoffeeLotTest {
                         "Lote Premium",
                         "Arábica",
                         "Cusco",
-                        "En cuarentena",
+                        "roasted",
                         1500.0,
                         "Lavado",
                         weight,
@@ -53,38 +52,38 @@ class CoffeeLotTest {
     @Test
     void createCoffeeLotSuccessfullyTest() {
 
-        var lot = createDisponibleLot(20.0);
+        var lot = createGreenLot(20.0);
 
         assertEquals("Lote Premium", lot.getLotName());
         assertEquals(20.0, lot.getRemainingWeight());
-        assertEquals("Disponible", lot.getStatus().value());
+        assertEquals("green", lot.getStatus().value());
     }
 
     @Test
     void advanceStatusSuccessfullyTest() {
 
-        var lot = createEnCuarentenaLot(20.0);
+        var lot = createRoastedLot(20.0);
 
-        lot.advanceStatus("Disponible");
+        lot.advanceStatus("green");
 
-        assertEquals("Disponible", lot.getStatus().value());
+        assertEquals("green", lot.getStatus().value());
     }
 
     @Test
     void advanceStatusShouldThrowExceptionWhenRemainingWeightIsZeroTest() {
 
-        var lot = createEnCuarentenaLot(20.0);
+        var lot = createRoastedLot(20.0);
 
         lot.setRemainingWeight(0.0);
 
         assertThrows(InvalidNewStatusException.class,
-                () -> lot.advanceStatus("Disponible"));
+                () -> lot.advanceStatus("green"));
     }
 
     @Test
     void consumeStockShouldReduceRemainingWeightTest() {
 
-        var lot = createDisponibleLot(20.0);
+        var lot = createGreenLot(20.0);
 
         lot.consumeStock(5.0);
 
@@ -92,21 +91,22 @@ class CoffeeLotTest {
     }
 
     @Test
-    void consumeStockShouldSetStatusAgotadoWhenRemainingWeightIsZeroTest() {
+    void consumeStockShouldKeepStatusWhenRemainingWeightIsZeroTest() {
 
-        var lot = createDisponibleLot(20.0);
+        var lot = createGreenLot(20.0);
 
         lot.consumeStock(20.0);
 
-        assertEquals("Agotado", lot.getStatus().value());
+        assertEquals("green", lot.getStatus().value());
     }
 
     @Test
-    void consumeStockShouldThrowExceptionWhenStatusIsNotDisponibleTest() {
+    void consumeStockShouldAllowGreenStatusTest() {
 
-        var lot = createEnCuarentenaLot(20.0);
+        var lot = createGreenLot(20.0);
+        lot.setRemainingWeight(10.0);
 
-        assertThrows(LotInvariantException.class,
-                () -> lot.consumeStock(5.0));
+        assertDoesNotThrow(() -> lot.consumeStock(5.0));
+        assertEquals("green", lot.getStatus().value());
     }
 }
