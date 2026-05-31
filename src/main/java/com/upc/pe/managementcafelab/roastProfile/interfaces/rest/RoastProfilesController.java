@@ -5,6 +5,7 @@ import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetAllRoas
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetFavoriteRoastProfilesQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfileByIdQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfilesByCoffeeLotIdQuery;
+import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfilesByUserIdQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.services.RoastProfileCommandService;
 import com.upc.pe.managementcafelab.roastProfile.domain.services.RoastProfileQueryService;
 import com.upc.pe.managementcafelab.roastProfile.interfaces.rest.resources.CreateRoastProfileResource;
@@ -120,6 +121,25 @@ public class RoastProfilesController {
         var roastProfiles =
                 queryService.handle(
                         new GetRoastProfilesByCoffeeLotIdQuery(coffeeLotId)
+                );
+
+        var resources =
+                roastProfiles.stream()
+                        .map(RoastProfileResourceFromEntityAssembler::toResourceFromEntity)
+                        .collect(Collectors.toList());
+
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping("/user/{userId}")
+    @Operation(summary = "Get roast profiles by user id")
+    public ResponseEntity<?> getByUserId(
+            @PathVariable Long userId
+    ) {
+
+        var roastProfiles =
+                queryService.handle(
+                        new GetRoastProfilesByUserIdQuery(userId)
                 );
 
         var resources =

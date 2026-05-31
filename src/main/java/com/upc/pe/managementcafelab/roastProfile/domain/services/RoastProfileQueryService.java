@@ -14,5 +14,7 @@ public interface RoastProfileQueryService {
 
     List<RoastProfile> handle(GetRoastProfilesByCoffeeLotIdQuery query);
 
+    List<RoastProfile> handle(GetRoastProfilesByUserIdQuery query);
+
     List<RoastProfile> handle(GetFavoriteRoastProfilesQuery query);
 }

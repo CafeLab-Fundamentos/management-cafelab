@@ -5,6 +5,7 @@ import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetAllRoas
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetFavoriteRoastProfilesQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfileByIdQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfilesByCoffeeLotIdQuery;
+import com.upc.pe.managementcafelab.roastProfile.domain.model.queries.GetRoastProfilesByUserIdQuery;
 import com.upc.pe.managementcafelab.roastProfile.domain.services.RoastProfileQueryService;
 import com.upc.pe.managementcafelab.roastProfile.infrastructure.persistence.jpa.repositories.RoastProfileRepository;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class RoastProfileQueryServiceImpl implements RoastProfileQueryService {
     public List<RoastProfile> handle(GetRoastProfilesByCoffeeLotIdQuery query) {
 
         return repository.findByCoffeeLotId(query.coffeeLotId());
+    }
+
+    @Override
+    public List<RoastProfile> handle(GetRoastProfilesByUserIdQuery query) {
+
+        return repository.findByUserId(query.userId());
     }
 
     @Override

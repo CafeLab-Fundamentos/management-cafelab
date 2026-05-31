@@ -11,5 +11,7 @@ public interface RoastProfileRepository extends JpaRepository<RoastProfile, Long
 
     List<RoastProfile> findByCoffeeLotId(Long coffeeLotId);
 
+    List<RoastProfile> findByUserId(Long userId);
+
     List<RoastProfile> findByIsFavorite(Boolean isFavorite);
 }
