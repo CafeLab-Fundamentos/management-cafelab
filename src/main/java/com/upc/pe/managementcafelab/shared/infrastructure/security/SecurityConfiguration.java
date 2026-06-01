@@ -31,8 +31,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(Customizer.withDefaults()) // <- IMPORTANTE
-                .csrf(csrf -> csrf.disable())    // <- más simple para APIs REST
+                .cors(Customizer.withDefaults()) 
+                .csrf(csrf -> csrf.disable())   
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 COFFEE_API,
@@ -57,6 +57,7 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of("https://front-funda.web.app"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
