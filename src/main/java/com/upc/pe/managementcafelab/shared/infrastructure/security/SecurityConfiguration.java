@@ -56,8 +56,7 @@ public class SecurityConfiguration {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedOrigins(List.of("https://front-funda.web.app"));
+        configuration.setAllowedOrigins(List.of("*"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
