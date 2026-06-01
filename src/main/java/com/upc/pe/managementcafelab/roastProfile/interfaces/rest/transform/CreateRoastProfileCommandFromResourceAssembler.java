@@ -17,7 +17,10 @@ public class CreateRoastProfileCommandFromResourceAssembler {
                 resource.temperatureEnd(),
                 resource.durationSeconds(),
                 resource.type(),
-                resource.isFavorite()
+                resource.isFavorite(),
+                resource.acidity(),
+                resource.sweetness(),
+                resource.body()
         );
     }
 }

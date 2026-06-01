@@ -18,7 +18,10 @@ public class RoastProfileResourceFromEntityAssembler {
                 entity.getTemperatureRange().end(),
                 entity.getDurationSeconds().seconds(),
                 entity.getType().name(),
-                entity.getIsFavorite()
+                entity.getIsFavorite(),
+                entity.getAcidity(),
+                entity.getSweetness(),
+                entity.getBody()
         );
     }
 }

@@ -6,6 +6,9 @@
             Double temperatureEnd,
             Integer durationSeconds,
             String type,
-            Boolean isFavorite
+            Boolean isFavorite,
+            Integer acidity,
+            Integer sweetness,
+            Integer body
     ) {
     }

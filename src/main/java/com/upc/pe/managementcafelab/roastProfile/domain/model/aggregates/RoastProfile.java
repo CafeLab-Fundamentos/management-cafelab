@@ -26,6 +26,7 @@ public class RoastProfile extends AuditableAbstractAggregateRoot<RoastProfile> {
     @Column(name = "name", nullable = false)
     private String name;
 
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "start", column = @Column(name = "temperature_start", nullable = false)),
@@ -43,35 +44,59 @@ public class RoastProfile extends AuditableAbstractAggregateRoot<RoastProfile> {
     @Column(name = "is_Favorite", nullable = false)
     private Boolean isFavorite;
 
+    @Column(name = "acidity", nullable = false)
+    private Integer acidity;
+
+    @Column(name = "sweetness", nullable = false)
+    private Integer sweetness;
+
+    @Column(name = "body", nullable = false)
+    private Integer body;
+
     public RoastProfile() {
     }
     public RoastProfile(
-            Long coffeeLotId,
-            Long userId,
-            String name,
-            TemperatureRange temperatureRange,
-            DurationInSeconds durationSeconds,
-            RoastType type,
-            Boolean isFavorite
-    ) {
-        this.coffeeLotId = coffeeLotId;
-        this.userId = userId;
-        this.name = name;
-        this.temperatureRange = temperatureRange;
-        this.durationSeconds = durationSeconds;
-        this.type = type;
-        this.isFavorite = isFavorite;
-    }
+        Long coffeeLotId,
+        Long userId,
+        String name,
+        TemperatureRange temperatureRange,
+        DurationInSeconds durationSeconds,
+        RoastType type,
+        Boolean isFavorite,
+        Integer acidity,
+        Integer sweetness,
+        Integer body
+)
+{
+    this.coffeeLotId = coffeeLotId;
+    this.userId = userId;
+    this.name = name;
+    this.temperatureRange = temperatureRange;
+    this.durationSeconds = durationSeconds;
+    this.type = type;
+    this.isFavorite = isFavorite;
 
-    public RoastProfile(CreateRoastProfileCommand command) {
-        this(
-                command.coffeeLotId(),
-                command.userId(),
-                command.name(),
-                new TemperatureRange(command.temperatureStart(), command.temperatureEnd()),
-                new DurationInSeconds(command.durationSeconds()),
-                RoastType.valueOf(command.type().toUpperCase()),
-                command.isFavorite()
+    this.acidity = acidity;
+    this.sweetness = sweetness;
+    this.body = body;
+}
+
+public RoastProfile(CreateRoastProfileCommand command) {
+    this(
+            command.coffeeLotId(),
+            command.userId(),
+            command.name(),
+            new TemperatureRange(
+                    command.temperatureStart(),
+                    command.temperatureEnd()
+            ),
+            new DurationInSeconds(command.durationSeconds()),
+            RoastType.valueOf(command.type().toUpperCase()),
+            command.isFavorite(),
+
+            command.acidity(),
+            command.sweetness(),
+            command.body()
         );
     }
 
@@ -81,6 +106,10 @@ public class RoastProfile extends AuditableAbstractAggregateRoot<RoastProfile> {
         this.durationSeconds = new DurationInSeconds(command.durationSeconds());
         this.type = RoastType.valueOf(command.type().toUpperCase());
         this.isFavorite = command.isFavorite();
+        this.type = RoastType.valueOf(command.type().toUpperCase());
+        this.acidity = command.acidity();
+        this.sweetness = command.sweetness();
+        this.body = command.body();
 
     }
 }

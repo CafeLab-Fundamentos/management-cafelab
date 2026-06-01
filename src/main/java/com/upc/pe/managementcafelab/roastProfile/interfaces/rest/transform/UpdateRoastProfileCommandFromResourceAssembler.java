@@ -20,7 +20,10 @@ public class UpdateRoastProfileCommandFromResourceAssembler {
                 resource.temperatureEnd(),
                 resource.durationSeconds(),
                 resource.type().toUpperCase(),
-                resource.isFavorite()
+                resource.isFavorite(),
+                resource.acidity(),
+                resource.sweetness(),
+                resource.body()
         );
     }
 }
